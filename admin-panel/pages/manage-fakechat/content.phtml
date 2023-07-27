@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+
+    <title>Chat App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        /* body {
+            margin-top: 10px;
+        } */
+
+        .chat-online {
+            color: #34ce57
+        }
+
+        .chat-offline {
+            color: #e4606d
+        }
+
+        .chat-messages {
+            display: flex;
+            flex-direction: column;
+            max-height: 390px;
+            min-height: 390px;
+            overflow-y: scroll
+        }
+
+        .chat-message-left,
+        .chat-message-right {
+            display: flex;
+            flex-shrink: 0
+        }
+
+        .chat-message-left {
+            margin-right: auto
+        }
+
+        .chat-message-right {
+            flex-direction: row-reverse;
+            margin-left: auto
+        }
+
+        .py-3 {
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        .px-4 {
+            padding-right: 1.5rem !important;
+            padding-left: 1.5rem !important;
+        }
+
+        .flex-grow-0 {
+            flex-grow: 0 !important;
+        }
+
+        .border-top {
+            border-top: 1px solid #dee2e6 !important;
+        }
+
+        .chatusers {
+            display: flex;
+            flex-direction: column;
+            max-height: 540px;
+            overflow-y: scroll
+        }
+    </style>
+</head>
+
+<body onload="reloadUsers()">
+    <main class="content">
+        <div class="bg-dark p-2">
+            <a href="index.php" class="btn btn-primary">Main Website</a>
+        <a href="dashboard" class="btn btn-primary">Dashbaord</a>
+        </div>
+        <div class="container-fluid">
+            <!-- <a href="#">Home</a> -->
+            <h1 class="h3 mb-3 mt-3">Messages</h1>
+            
+            <div class="card">
+                <div class="row g-0" id="main-chat-row">
+                    <div class="col-12 col-lg-5 col-xl-3 border-right chatusers">
+                        <div class="px-4 d-none d-md-block my-3">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <!-- <input type="text" class="form-control my-3" placeholder="Search..."> -->
+                                </div>
+                            </div>
+                        </div>
+
+                       <div id="chatusers">
+                            <div id="showchatusers">
+
+                            </div>
+                       </div>
+
+                        <!-- users who did chat -->
+                        <!-- <a href="#" class="list-group-item list-group-item-action border-0">
+                            <div class="badge bg-success float-right"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" zoomAndPan="magnify" viewBox="0 0 30 30.000001" height="15" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><clipPath id="id1"><path d="M 3.460938 6.5625 L 26.539062 6.5625 L 26.539062 24.707031 L 3.460938 24.707031 Z M 3.460938 6.5625 " clip-rule="nonzero" fill="#00ff11"></path></clipPath></defs><g clip-path="url(#id1)"><path fill="#00ff11" d="M 24.230469 11.101562 L 15 16.769531 L 5.769531 11.101562 L 5.769531 8.832031 L 15 14.503906 L 24.230469 8.832031 Z M 24.230469 6.5625 L 5.769531 6.5625 C 4.492188 6.5625 3.472656 7.578125 3.472656 8.832031 L 3.460938 22.441406 C 3.460938 23.695312 4.492188 24.707031 5.769531 24.707031 L 24.230469 24.707031 C 25.507812 24.707031 26.539062 23.695312 26.539062 22.441406 L 26.539062 8.832031 C 26.539062 7.578125 25.507812 6.5625 24.230469 6.5625 " fill-opacity="1" fill-rule="nonzero"></path></g></svg></div>
+                            <div class="d-flex align-items-start">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar5.png"
+                                    class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
+                                <div class="flex-grow-1 ml-3">
+                                    Zahid Akbar
+                                    <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action border-0">
+                            <div class="badge bg-success float-right"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" zoomAndPan="magnify" viewBox="0 0 30 30.000001" height="15" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><clipPath id="id1"><path d="M 3.460938 6.5625 L 26.539062 6.5625 L 26.539062 24.707031 L 3.460938 24.707031 Z M 3.460938 6.5625 " clip-rule="nonzero" fill="#00ff11"></path></clipPath></defs><g clip-path="url(#id1)"><path fill="#00ff11" d="M 24.230469 11.101562 L 15 16.769531 L 5.769531 11.101562 L 5.769531 8.832031 L 15 14.503906 L 24.230469 8.832031 Z M 24.230469 6.5625 L 5.769531 6.5625 C 4.492188 6.5625 3.472656 7.578125 3.472656 8.832031 L 3.460938 22.441406 C 3.460938 23.695312 4.492188 24.707031 5.769531 24.707031 L 24.230469 24.707031 C 25.507812 24.707031 26.539062 23.695312 26.539062 22.441406 L 26.539062 8.832031 C 26.539062 7.578125 25.507812 6.5625 24.230469 6.5625 " fill-opacity="1" fill-rule="nonzero"></path></g></svg></div>
+                            <div class="d-flex align-items-start">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png"
+                                    class="rounded-circle mr-1" alt="William Harris" width="40" height="40">
+                                <div class="flex-grow-1 ml-3">
+                                    Janu Jakhar
+                                    <div class="small"><span class="fas fa-circle chat-online"></span> Offline</div>
+                                </div>
+                            </div>
+                        </a> -->
+
+
+                        <hr class="d-block d-lg-none mt-1 mb-0">
+                    </div>
+                    <div class="col-12 col-lg-7 col-xl-9">
+                        <div class="row" id="chat-main-container">
+                           <div class="col-lg-12">
+                            <div class="py-2 px-4 border-bottom d-none d-lg-block">
+                                <div class="d-flex align-items-center py-1">
+                                    <!-- <div class="position-relative">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                            class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                    </div> -->
+                                    <div class="flex-grow-1 pl-3">
+                                        <strong>Conversation</strong>
+                                    </div>
+                                    <div>
+                                        <button class="btn border btn-lg mr-1 px-3" id="showuserdetail"><svg xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-users">
+                                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="9" cy="7" r="4"></circle>
+                                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                            </svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="position-relative" id="chat_container">
+                                <div class="chat-messages p-4" id="chat_result">
+                                     <!-- <div class="chat-message-right pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:33 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">You</div>
+                                            Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
+                                        </div>
+                                    </div> -->
+                                  <!--  <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                                class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:34 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Janu Jakhar</div>
+                                            Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:35 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">You</div>
+                                            Cum ea graeci tractatos.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                                class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:36 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Janu Jakhar</div>
+                                            Sed pulvinar, massa vitae interdum pulvinar, risus lectus porttitor magna, vitae
+                                            commodo lectus mauris et velit.
+                                            Proin ultricies placerat imperdiet. Morbi varius quam ac venenatis tempus.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                                class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:37 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Janu Jakhar</div>
+                                            Cras pulvinar, sapien id vehicula aliquet, diam velit elementum orci.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:38 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">You</div>
+                                            Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                                class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:39 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Janu Jakhar</div>
+                                            Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:40 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">You</div>
+                                            Cum ea graeci tractatos.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:41 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">You</div>
+                                            Morbi finibus, lorem id placerat ullamcorper, nunc enim ultrices massa, id
+                                            dignissim metus urna eget purus.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                                class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:42 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Janu Jakhar</div>
+                                            Sed pulvinar, massa vitae interdum pulvinar, risus lectus porttitor magna, vitae
+                                            commodo lectus mauris et velit.
+                                            Proin ultricies placerat imperdiet. Morbi varius quam ac venenatis tempus.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-right mb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:43 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                            <div class="font-weight-bold mb-1">You</div>
+                                            Lorem ipsum dolor sit amet, vis erat denique in, dicunt prodesset te vix.
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-left pb-4">
+                                        <div>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                                class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            <div class="text-muted small text-nowrap mt-2">2:44 am</div>
+                                        </div>
+                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                            <div class="font-weight-bold mb-1">Janu Jakhar</div>
+                                            Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="flex-grow-0 py-3 px-4 border-top">
+                                <form action="<?php echo $site_url; ?>/aj/chat/send_message_fk_admin" id="chat_message_form" method="post">
+                                <div class="input-group">
+
+                                    
+                                <input type="hidden" name="to" value="" id="to_message"/>
+	                            <input type="hidden" name="from" value="" id="from_message"/>
+                                    <input type="text" class="form-control dt_emoji1" placeholder="Type your message" name="text" required="" id="dt_emoji">
+                                    <!-- <a class="msg_send_btn1" data-input="thumbnail" data-preview="holder" type="button"
+                                        id="image"><i class="fa fa-paperclip" aria-hidden="true"></i></a> -->
+                                    <button type="submit"  id="btn_chat_f_send" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16"> <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/> </svg></button>
+                                </div>
+                            </form>
+                            </div>
+                           </div>
+                           <!-- <div style="width: 20%;" id="col-test">
+                            <p id="paragraph" class="mt-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita provident, laudantium laboriosam facere debitis repellendus quaerat dolore officia, non quia quibusdam, quos nobis similique doloribus soluta repellat animi autem architecto.</p>
+                           </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+    <script>
+        function Wo_Ajax_Requests_File(){
+            return "<?php echo $wo['config']['site_url'].'/admin-panel/requests.php';?>"
+        }
+    </script>
+    <script src="https://www.simplisathi.com/themes/love/assets/js/chat.js?v=1690446053" type="text/javascript" id="chat-script"></script>
+
+<script type="text/javascript">
+    function scrollToBottom() {
+            var scrollBox = document.getElementById('chat_result');
+            scrollBox.scrollTop = scrollBox.scrollHeight;
+    }
+
+    function viewChat(senderid,receiverid, reload = "bottom") {
+
+$.post(Wo_Ajax_Requests_File() + '?f=getchat&senderid='+senderid+'&receiverid='+receiverid, function (data) {
+    if(data.status==200){
+           $('#chat_result').html(data.chat);
+           $('#to_message').val(receiverid);
+           $('#from_message').val(senderid);
+           
+           $("#chat_container").animate({ scrollTop: $('#chat_container').prop("scrollHeight")}, 1000);
+           if(reload == "bottom"){
+            scrollToBottom();
+           }
+        //    $('.dt_emoji1').val('');
+        //    $('.dt_emoji1').focus();
+        // alert("hello");
+
+       }
+    });
+    
+    
+};
+
+function reloadChat() {
+      var to = document.getElementById('to_message').value; 
+      var from = document.getElementById('from_message').value;
+	  if(to != '' && from != ''){
+		viewChat(from, to , "reload");
+	  }
+    }
+
+	setInterval(reloadChat, 2000);
+  
+
+    
+
+function reloadUsers(){
+        // $('#showchatusers').empty();
+
+        $.get(Wo_Ajax_Requests_File() + '?f=reloaduser&username=', function (data) {
+            console.log("here");
+    if(data){
+           $('#showchatusers').html(data);
+           $("#chatusers").animate({ scrollTop: $('#chatusers').prop("scrollHeight")}, 1000);
+           
+
+       }
+    });
+}
+setInterval(reloadUsers, 10000);
+
+    // // Set up the onclick event for the button
+    // $(document).ready(function() {
+    //   $("#loadPHPContentBtn").on("click", showChatUsers);
+    // });
+
+
+    
+    var columnWidthIsFull = true;
+    document.getElementById('showuserdetail').addEventListener('click', function () {
+        var secondColumn = document.getElementById('chat-main-container');
+        var coltest = document.getElementById('col-test');
+
+        if (columnWidthIsFull) {
+            secondColumn.style.width = '75%';
+            columnWidthIsFull = false;
+        } else {
+            secondColumn.style.width = '100%';
+            columnWidthIsFull = true;
+        }
+    });
+  </script>
+</body>
+
+</html>

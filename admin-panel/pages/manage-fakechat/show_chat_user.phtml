@@ -1,0 +1,81 @@
+<?php
+global $db;
+
+// $sql = "select distinct sender.username as senderName,sender.src as registerStatus, sender.id as sender_id,
+//                 receiver.username as receiverName, receiver.id as receiver_id 
+// from conversations as msg inner join users as sender on msg.sender_id = sender.id
+//                   inner join users as receiver on msg.receiver_id = receiver.id ORDER BY msg.id = 'desc'";
+
+                  $sql = "select distinct sender.username as senderName,sender.src as registerStatus, sender.id as sender_id,
+                receiver.username as receiverName, receiver.id as receiver_id 
+from conversations as msg inner join users as sender on msg.sender_id = sender.id
+                  inner join users as receiver on msg.receiver_id = receiver.id ORDER BY msg.id = 'desc'";
+// $sql = "select * from users where src='Fake'";
+
+				  $fake_users = $db->query($sql);
+// var_dump($fake_users);
+$res;
+if(count($fake_users)>0){
+    $res=ToObject($fake_users);
+}else{
+    $res=ToObject(array());
+}
+
+// var_dump($res);
+?><?php if(count((array)$res) == 0){?>
+    <div class="alert alert-soft-info  align-items-center" id="no-new-messages" role="alert" style="margin: 10px; text-align: center;">
+        <div class="text-body">No User Found</div>
+    </div>
+      <?php }else{ ?>
+
+        <?php foreach($res as $k=>$v){
+$sender_image=userData($v->sender_id)->avater->full;
+$receiver_image=userData($v->receiver_id)->avater->full;
+?>
+
+<div class="card p-2 mb-2 ml-2"  data-conv="15163161301516316000" data-chatid="782" data-uid="<?=$v->sender_id;?>" data-search-bind="<?=$v->senderName;?>" data-cid="<?=$v->receiver_id;?>" data-name="<?=$v->receiverName;?>" data-id="<?=$v->sender_id;?>" onclick="viewChat(<?=$v->sender_id;?>,<?=$v->receiver_id;?>);" data-photo="<?=$sender_image;?>" style="cursor: pointer;">
+
+<div class="list-group-item list-group-item-action border-0">
+                        <div class="d-flex align-items-start">
+
+                        <?php if($sender_image) { ?>
+                        <img src="<?=$sender_image;?>" alt="Avatar" class="rounded-circle mr-1" width="30" height="30">
+                        <?php } else { ?>
+<img src="<?php echo $site_url; ?>/upload/photos/d-avatar.jpg" alt="Avatar" class="rounded-circle mr-1" width="30" height="30">
+<?php } ?>
+
+                            <!-- <img src="https://bootdey.com/img/Content/avatar/avatar5.png"
+                                class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40"> -->
+                            <div class="flex-grow-1 ml-3">
+                            From: <?=$v->sender_id;?>
+                            </div>
+                        </div>
+
+
+
+                        </div>
+
+                    <div class="list-group-item list-group-item-action border-0">
+                        <div class="d-flex align-items-start">
+
+                        <?php if($receiver_image) { ?>
+                        <img src="<?=$receiver_image;?>" alt="Avatar" class="rounded-circle mr-1" width="30" height="30">
+                        <?php } else { ?>
+<img src="<?php echo $site_url; ?>/upload/photos/d-avatar.jpg" alt="Avatar" class="rounded-circle mr-1" width="30" height="30">
+<?php } ?>
+
+                            <div class="flex-grow-1 ml-3">
+                            To: <?=$v->receiver_id;?>
+                            </div>
+                        </div>
+
+
+
+                        </div>
+
+</div>
+
+
+          
+<?php } }  ?>
+

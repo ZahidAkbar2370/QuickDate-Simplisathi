@@ -1,0 +1,531 @@
+<style>
+.input-group-text.pr-2 {
+	width: 100%;
+	height: 36px;
+}
+.list-group-item.d-flex.align-items-start.border-right-3.border-right-primary.rightSectionChatUser.bg-light {
+	border: 1px solid black !important;
+}
+
+ .msg_r_combo .m_msg_part {
+	overflow: hidden;
+	margin-left: 40px;
+}
+ .messages--received .message:last-child {
+	border-bottom-left-radius: 16px;
+}
+ .messages--received .message:first-child {
+	border-top-left-radius: 16px;
+}
+ .messages--received .message {
+	float: left;
+	background-color: #E9E7E9;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+} 
+ .messages .message {
+	display: block;
+	margin-bottom: 5px;
+	clear: both;
+	padding: 9px 18px;
+	border-radius: 16px;
+	max-width: 70%;
+	font: normal normal normal 16px/1.4 Helvetica;
+}
+
+ .msg_s_combo .m_msg_part {
+	overflow: hidden;
+	margin-right: 24px;
+}
+
+ .msg_r_combo {
+	position: relative;
+}
+ .msg_r_combo .m_avatar {
+	height: 28px;
+	width: 28px;
+	overflow: hidden;
+	border-radius: 50%;
+	position: absolute;
+	bottom: 4px;
+}
+
+ .messages {
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+ .msg_s_combo .seen {position: absolute;bottom: 2px;right: 2px;width: 17px;height: 17px;overflow: hidden;line-height: 1;}
+.msg_s_combo .seen svg {width: 17px;}
+ .msg_s_combo .seen svg path {fill: #CC42BD;}
+ 
+ 
+.messages {
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+ .msg_s_combo {
+	position: relative;
+}
+ .msg_s_combo .m_msg_part {
+	overflow: hidden;
+	margin-right: 24px;
+}
+.messages--sent .message:last-child {
+	border-bottom-right-radius: 16px;
+}
+ .messages--sent .message:first-child {
+	border-top-right-radius: 16px;
+}
+ .messages--sent .message {
+	float: right;
+	background-color: #FCCBF7;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+}
+ .messages .message {
+	display: block;
+	margin-bottom: 5px;
+	clear: both;
+	padding: 9px 18px;
+	border-radius: 16px;
+	max-width: 70%;
+	font: normal normal normal 16px/1.4 Helvetica;
+}
+
+
+.valign-wrapper {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+}
+.chat_f_attach {
+	line-height: 1;
+	margin-right: 13px;
+}
+.chat_f_attach span {
+	color: #666a76;
+	cursor: pointer;
+	margin-left: 4px;
+}
+svg:not(:root) {
+	overflow: hidden;
+}
+.chat_f_attach span {
+	color: #666a76;
+	cursor: pointer;
+	margin-left: 4px;
+}
+.chat_f_attach span {
+	color: #666a76;
+	cursor: pointer;
+	margin-left: 4px;
+}
+.chat_f_textarea {
+	position: relative;
+	flex: 1;
+	max-width: calc(100% - 50px);
+}
+.chat_f_textarea .chat_f_write {
+	height: 44px;
+}
+.chat_f_textarea .emojionearea {
+	background: #E9E7E9;
+	border: 0;
+	resize: none;
+	border-radius: 2em 0 0 2em;
+}
+.emojionearea, .emojionearea.form-control {
+	display: block;
+	position: relative !important;
+	width: 100%;
+	height: auto;
+	padding: 0;
+}
+.emojionearea, .emojionearea.form-control {
+	display: block;
+	position: relative !important;
+	width: 100%;
+	height: auto;
+	padding: 0;
+}
+.emojionearea, .emojionearea * {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.chat_f_textarea .emojionearea .emojionearea-editor {
+	padding: 10px 0px;
+	margin: 0 40px 0 15px;
+	box-shadow: none;
+	border-radius: 0;
+	height: 44px;
+	background: transparent;
+}
+
+.emojionearea .emojionearea-editor {
+	display: block;
+	line-height: 1.42857143;
+	color: #555;
+	cursor: text;
+	
+	border: 0;
+	resize: none;
+	
+	font-size: 16px;
+	white-space: nowrap;
+	overflow: hidden;
+	position: relative;
+}
+
+.chat_f_textarea .emojionearea .emojionearea-editor:empty::before {
+	color: currentColor;
+}
+.emojionearea .emojionearea-editor:empty::before {
+	content: attr(placeholder);
+	display: block;
+}
+
+.chat_f_textarea .emojionearea .emojionearea-button {
+	left: auto;
+	right: 8px;
+}
+
+.emojionearea .emojionearea-button {
+	z-index: 5;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 24px;
+	height: 24px;
+	opacity: 0.8;
+	cursor: pointer;
+	transition: opacity .3s ease-in-out;
+}
+
+.chat_f_send {
+	position: relative;
+}
+
+.chat_f_send .btn-floating {
+	width: 44px;
+	height: 44px;
+	line-height: 44px;
+	box-shadow: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #a33596;
+	border-radius: 0 50% 50% 0;
+	border: 0;
+}
+
+.btn-floating.btn-large {
+	
+	padding: 0;
+}
+
+
+.chat_f_attach {
+	line-height: 1;
+	margin-right: 13px;
+}
+
+.chat_foot {
+	flex-shrink: 0;
+}
+
+ .content {
+	clear: both;
+}
+.content {
+	border-radius: 15px 15px 0 0;
+	height: calc(100vh - 70px);
+}
+.content {
+	padding: 30px;
+	margin-top: 70px;
+	margin-left: 310px;
+	margin-right: 30px;
+	border-radius: 15px;
+	background-color: #f4f5fd;
+	overflow: auto;
+	height: calc(100vh - 70px - 50px);
+}
+
+ .chat_f_text {
+	width: 100%;
+	height: 70px;
+	position: relative;
+	background: #FFFFFF 0% 0% no-repeat padding-box;
+	box-shadow: 0px -2px 3px rgb(0 0 0 / 7%);
+}
+
+.valign-wrapper {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.hide {
+	display: none !important;
+}
+
+textarea {
+	height: 44px;
+	width: 335px;
+}
+</style>
+
+
+
+<?php
+global $db;
+include 'function.php';
+$sql = "select distinct sender.username as senderName, sender.id as sender_id,
+                receiver.username as receiverName, receiver.id as receiver_id 
+from conversations as msg inner join users as sender on msg.sender_id = sender.id
+                  inner join users as receiver on msg.receiver_id = receiver.id ORDER BY msg.id = 'desc'";
+// $sql = "select * from users where src='Fake'";
+
+				  $fake_users = $db->query($sql);
+// var_dump($fake_users);
+$res;
+if(count($fake_users)>0){
+    $res=ToObject($fake_users);
+}else{
+    $res=ToObject(array());
+}
+
+// var_dump($res);
+?>
+
+
+<script src="https://www.simplisathi.com/themes/love/assets/js/chat.js?v=<?php echo time(); ?>" type="text/javascript" id="chat-script"></script>
+
+<div class="container-fluid">
+    <div>
+        <h3>Manage Fake User Chat</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#">Fake User Chat</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Manage Chat</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                  <h6 class="card-title">Manage Fake User Chat</h6>
+                   <input type="hidden" id="hash_id" name="hash_id" value="<?php echo Wo_CreateSession();?>">
+                   <div class="clearfix"></div>
+				   
+				    
+					<div class="app-chat-container" data-full-height-chat="" style="height: 493px;">
+      <div class="row h-100 m-0">
+
+  <div class="col-lg-5 py-3 px-0 bg-light border-left d-flex flex-column card" style="border-radius: 0">
+
+      <div class="form-group px-3">
+
+          <div class="flex">
+              <nav aria-label="breadcrumb" style="margin-bottom: 15px">
+                <center>
+                <ol class="breadcrumb" style="margin: 0 auto;text-align: center;">
+                    <li class="breadcrumb-item">
+                      <a href="javascript:;" id="new-messages" onclick="fakeMessagesTab('All');" style="font-size: 12px;color: #0069f5">All Member Chat</a>
+                    </li>
+                    <!--li class="breadcrumb-item">
+                      <a href="javascript:;" id="all-messages" onclick="fakeMessagesTab('All');" style="font-size: 12px;color:#999">ALL MESSAGES (0)</a>
+                    </li-->
+                </ol>  
+                </center>          
+              </nav>
+          </div>        
+          <!-- <div class="input-group input-group-merge input-group-rounded">
+              <input type="search" class="form-control form-control-prepended" id="search_chat_member" placeholder="Filter members">
+              <div class="input-group-prepend">
+                  <div class="input-group-text">
+                      <span class="material-icons">filter_list</span>
+                  </div>
+              </div>
+          </div> -->
+      </div>
+      <div class="flex d-flex flex-column" style="overflow-x: hidden !important; height: 393px;" data-full-height-chat-right="">
+          <div data-simplebar="init" class="h-100"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content" style="padding: 0px; height: 100%; overflow: hidden;">
+		  
+		  <?php if(count((array)$res)== 0){?>
+<div class="alert alert-soft-info  align-items-center" id="no-new-messages" role="alert" style="margin: 10px; text-align: center;">
+    <div class="text-body">No User Found</div>
+</div>
+		  <?php }else{ ?>
+
+
+<?php foreach($res as $k=>$v){
+	$sender_image=userData($v->sender_id)->avater->full;
+	$receiver_image=userData($v->receiver_id)->avater->full;
+	?>
+              <div class="list-group list-group-flush" data-fake-new-messages="" style="position: relative; z-index: 0; opacity: 1;">
+			  <div class="list-group-item d-flex align-items-start border-right-3 border-right-primary rightSectionChatUser bg-light" data-conv="15163161301516316000" data-chatid="782" data-uid="<?=$v->sender_id;?>" data-search-bind="<?=$v->senderName;?>" data-cid="<?=$v->receiver_id;?>" data-name="<?=$v->receiverName;?>" data-id="<?=$v->sender_id;?>" onclick="viewChat(<?=$v->sender_id;?>,<?=$v->receiver_id;?>)" data-photo="<?=$sender_image;?>" style="cursor: pointer;">
+	                <div class="mr-3 d-flex flex-column align-items-center">
+						<div class="avatar avatar-md avatar-offline" style="margin-bottom:5px" data-toggle="tooltip" data-placement="top" title="" data-original-title="<?=$v->receiverName;?>">
+						
+						<?php if(getimagesize($sender_image)) { ?>
+						    <img src="<?=$sender_image;?>" alt="Avatar" class="avatar-img rounded-circle">
+							<?php } else { ?>
+<img src="<?php echo $site_url; ?>/upload/photos/d-avatar.jpg" alt="Avatar" class="avatar-img rounded-circle">
+<?php } ?>
+						</div>	 
+						<div class="avatar avatar-md avatar-online" data-toggle="tooltip" data-placement="top" title="" data-original-title="<?=$v->senderName;?>">
+<?php if (getimagesize($receiver_image)) { ?>
+						    <img src="<?=$receiver_image;?>" alt="Avatar" class="avatar-img rounded-circle">
+<?php } else { ?>
+<img src="<?php echo $site_url; ?>/upload/photos/d-avatar.jpg" alt="Avatar" class="avatar-img rounded-circle">
+<?php } ?>
+ 						</div>	 						                                           
+	                </div>
+	                <div class="flex">
+	                    <p class="m-0">
+	                        <span class="d-flex align-items-center mb-4">
+	                            <a href="javascript:;" class="text-dark-gray">From: <?=$v->senderName;?></a>
+	                           
+	                        </span>
+	                        <span class="d-flex align-items-end">
+	                            <span class="flex mr-3">
+	                                <strong class="text-body mb-1">To: <?=$v->receiverName;?></strong><br>
+                                      
+									  
+	                            </span>
+	                           
+	                        </span>
+	                    </p>
+	                </div>
+	            </div>
+			  
+			  </div>
+<?php } } ?>
+          </div></div></div><div class="simplebar-placeholder" style="width: 411px; height: 374px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div></div>
+      </div>
+  </div> 
+
+  <div class="col-lg-7 py-3 d-flex flex-column h-100 bg-white card">
+      <div class="search-form form-control-rounded search-form--light" style="display: none">
+          <input type="text" class="form-control" placeholder="Search messages" id="searchSample02">
+          <button class="btn" type="button" role="button"><i class="material-icons">search</i></button>
+      </div>
+
+      <div class="flex p-3 d-flex flex-column" id="chat_container" style="height: 550px;overflow-y: auto">
+          <div data-simplebar="init" class="chat_body_content h-100" id="chat_result">
+			
+		  <div class="simplebar-wrapper" style="margin: 0px;">
+		  
+		  <div class="simplebar-height-auto-observer-wrapper">
+			
+		  <div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content" style="padding: 0px; height: 100%; overflow: hidden;">
+
+          </div></div></div><div class="simplebar-placeholder" style="width: 515px; height: 394px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div></div></div>
+      </div>
+
+      <form class="input-group input-group-merge" action="<?php echo $site_url; ?>/aj/chat/send_message_fk_admin" id="chat_message_form">
+	    <input type="hidden" name="to" value="" id="to_message"/>
+	    <input type="hidden" name="from" value="" id="from_message"/>
+          <input type="text" class="form-control form-control-appended dt_emoji1" name="text" required="" id="dt_emoji" placeholder="Type message">
+                                                   
+          <div class="input-group-append">
+              <div class="input-group-text pr-2">
+                  <button type="button" id="btn_chat_f_send" class="btn btn-flush btn-floating btn-large waves-effect waves-light"><i class="material-icons">send</i></button>
+				 
+              </div>
+          </div>
+      </form>
+	  
+	   <!-- <div class="chat_foot">
+                        <div class="chat_f_text">
+                            
+							<div class="chat_message_upload_media_imgprogress hide">
+								<div class="progress">
+									<div class="chat_message_upload_media_imgdeterminate determinate" style="width: 0%;"></div>
+								</div>
+							</div>
+                            <form method="POST" action="/chat/send_message" class="valign-wrapper" id="chat_message_form">
+                                <input type="hidden" name="to" value="" id="to_message"/>
+								<div class="chat_f_attach">
+									<span id="chat_message_upload_media" style="cursor: pointer;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"> <g id="Group_2960" data-name="Group 2960" transform="translate(-0.446 -0.01)"> <circle id="Ellipse_352" data-name="Ellipse 352" cx="13" cy="13" r="13" transform="translate(0.446 0.01)" fill="none"/> <path id="Icon_awesome-images" data-name="Icon awesome-images" d="M16.174,15.189v.539a1.617,1.617,0,0,1-1.617,1.617H1.617A1.617,1.617,0,0,1,0,15.728V7.1A1.617,1.617,0,0,1,1.617,5.485h.539v7.009a2.7,2.7,0,0,0,2.7,2.7Zm3.235-2.7V3.867A1.617,1.617,0,0,0,17.791,2.25H4.852A1.617,1.617,0,0,0,3.235,3.867v8.626a1.617,1.617,0,0,0,1.617,1.617H17.791A1.617,1.617,0,0,0,19.408,12.493ZM8.626,5.485A1.617,1.617,0,1,1,7.009,3.867,1.617,1.617,0,0,1,8.626,5.485ZM5.391,10.337,7.262,8.466a.4.4,0,0,1,.572,0L9.165,9.8l4.566-4.566a.4.4,0,0,1,.572,0L17.252,8.18v3.774H5.391Z" transform="translate(3.741 3.101)" fill="currentColor"/> </g> </svg>
+                                    </span>
+                                    <span id="chat_message_gify">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"> <g id="Group_2961" data-name="Group 2961" transform="translate(-0.336 -0.01)"> <circle id="Ellipse_352" data-name="Ellipse 352" cx="13" cy="13" r="13" transform="translate(0.336 0.01)" fill="none"/> <path id="Subtraction_18" data-name="Subtraction 18" d="M4156.957-248.087h-15.728a.909.909,0,0,1-.892-.9v-15.1a.9.9,0,0,1,.9-.9h12.107l4.5,4.554v11.429A.908.908,0,0,1,4156.957-248.087Zm-11.631-11.327a2.906,2.906,0,0,0-2.255.944,3.619,3.619,0,0,0-.853,2.51,3.415,3.415,0,0,0,.844,2.44,2.693,2.693,0,0,0,2.078.888,2.43,2.43,0,0,0,1.3-.327,3.115,3.115,0,0,0,.692-.645l.135.806h.883v-3.461h-2.657v1.077h1.475a1.689,1.689,0,0,1-.528,1.019,1.582,1.582,0,0,1-1.1.389,1.759,1.759,0,0,1-1.22-.494,2.215,2.215,0,0,1-.537-1.681,2.7,2.7,0,0,1,.5-1.767,1.591,1.591,0,0,1,1.266-.587,1.792,1.792,0,0,1,.731.145,1.263,1.263,0,0,1,.741.922h1.312a2.343,2.343,0,0,0-.846-1.555A2.939,2.939,0,0,0,4145.326-259.414Zm6.557.175h0v6.44h1.324v-2.7h2.827v-1.121h-2.827v-1.483h3.226v-1.133Zm-2.571-.008h0v6.449h1.325v-6.449Z" transform="translate(-4135.256 270.048)" fill="currentColor"/> </g> </svg>
+                                    </span>
+									<span id="chat_message_upload_stiker">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5.5,2C3.56,2 2,3.56 2,5.5V18.5C2,20.44 3.56,22 5.5,22H16L22,16V5.5C22,3.56 20.44,2 18.5,2H5.5M5.75,4H18.25A1.75,1.75 0 0,1 20,5.75V15H18.5C16.56,15 15,16.56 15,18.5V20H5.75A1.75,1.75 0 0,1 4,18.25V5.75A1.75,1.75 0 0,1 5.75,4M14.44,6.77C14.28,6.77 14.12,6.79 13.97,6.83C13.03,7.09 12.5,8.05 12.74,9C12.79,9.15 12.86,9.3 12.95,9.44L16.18,8.56C16.18,8.39 16.16,8.22 16.12,8.05C15.91,7.3 15.22,6.77 14.44,6.77M8.17,8.5C8,8.5 7.85,8.5 7.7,8.55C6.77,8.81 6.22,9.77 6.47,10.7C6.5,10.86 6.59,11 6.68,11.16L9.91,10.28C9.91,10.11 9.89,9.94 9.85,9.78C9.64,9 8.95,8.5 8.17,8.5M16.72,11.26L7.59,13.77C8.91,15.3 11,15.94 12.95,15.41C14.9,14.87 16.36,13.25 16.72,11.26Z" /></svg>
+                                    </span>
+								</div>
+                                <div class="chat_f_textarea">
+                                    <div class="chat_f_write">
+                                        <textarea placeholder="php echo __('Type a message');?>" id="dt_emoji" name="text" ></textarea>
+                                    </div>
+                                </div>
+                                <input type="file" id="chat_message_upload_media_file" class="hide" accept="image/x-png, image/gif, image/jpeg" name="avatar">
+                                <div class="chat_f_send">
+                                    <button type="button" id="btn_chat_f_send" class="btn-floating btn-large waves-effect waves-light">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" /></svg>
+                                    </button>
+                                    <div class="lds-facebook hide"><div></div><div></div><div></div></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div> -->
+                
+  </div>
+
+      </div>
+  </div>
+  
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+<script type="text/javascript">
+
+function viewChat(senderid,receiverid) {
+
+	$.post(Wo_Ajax_Requests_File() + '?f=getchat&senderid='+senderid+'&receiverid='+receiverid, function (data) {
+		if(data.status==200){
+			   $('#chat_result').html(data.chat);
+			   $('#to_message').val(receiverid);
+			   $('#from_message').val(senderid);
+			   
+			   $("#chat_container").animate({ scrollTop: $('#chat_container').prop("scrollHeight")}, 1000);
+			//    $('.dt_emoji1').val('');
+            //    $('.dt_emoji1').focus();
+		   }
+        });
+		
+		
+};
+
+function reloadChat() {
+      var to = document.getElementById('to_message').value; 
+      var from = document.getElementById('from_message').value;
+	  if(to != '' && from != ''){
+		viewChat(from, to);
+	  }
+    }
+
+	setInterval(reloadChat, 2000);
+</script>

@@ -51,6 +51,20 @@ if ($f == 'session_status') {
 if (!isset( $_SESSION['JWT'])) {
     exit("Please login or signup to continue.");
 }
+if($f == "getuserinformation"){
+    $senderId = $_GET["senderid"];
+    $receiverid = $_GET["receiverid"];
+
+    $senderUserQuery = "select * from users where id = '$senderId'";
+    $receiverUserQuery = "select * from users where id = '$receiverid'";
+
+    $senderUser = $db->query($senderUserQuery);
+    $receiverUser = $db->query($receiverUserQuery);
+
+    // return ["senderUser" => ToObject($senderUser), "receiverUser" => ToObject($receiverUser)];
+    echo json_encode([$senderUser, $receiverUser]);
+    exit;
+}
 if($f == "reloaduser"){
 global $db;
 
@@ -59,13 +73,17 @@ global $db;
 // from conversations as msg inner join users as sender on msg.sender_id = sender.id
 //                   inner join users as receiver on msg.receiver_id = receiver.id ORDER BY msg.id = 'desc'";
 
-                  $sql = "select distinct sender.username as senderName,sender.src as registerStatus, sender.id as sender_id,
-                receiver.username as receiverName, receiver.id as receiver_id 
+//                   $sql = "select distinct sender.username as senderName,sender.src as registerStatus, sender.id as sender_id,
+//                 receiver.username as receiverName, receiver.id as receiver_id 
+// from conversations as msg inner join users as sender on msg.sender_id = sender.id
+//                   inner join users as receiver on msg.receiver_id = receiver.id ORDER BY msg.id = 'desc'";
+$sql = "select distinct sender.username as senderName,sender.src as registerStatus, sender.id as sender_id,
+receiver.username as receiverName, receiver.id as receiver_id 
 from conversations as msg inner join users as sender on msg.sender_id = sender.id
-                  inner join users as receiver on msg.receiver_id = receiver.id ORDER BY msg.id = 'desc'";
+  inner join users as receiver on msg.receiver_id = receiver.id where sender.src= 'Fake' ORDER BY msg.id = 'desc' ";
 // $sql = "select * from users where src='Fake'";
 
-				  $fake_users = $db->query($sql);
+	$fake_users = $db->query($sql);
 // var_dump($fake_users);
 $res;
 $usersData = '';
@@ -2026,7 +2044,8 @@ if ($f == "admin_setting" && (auth()->admin == '1' || CheckUserPermission(auth()
                     'password' => Secure($password, 0),
                     'email_code' => Secure(md5($faker->userName . '_' . rand(111, 999)), 0),
                     'src' => 'Fake',
-                    'gender' => Secure($gender),
+                    // 'gender' => Secure($gender),
+                    'gender' => "4525",
                     'lastseen' => time(),
                     'verified' => 1,
                     'active' => 1,

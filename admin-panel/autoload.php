@@ -265,6 +265,20 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
 if($page == "manage-fakechat"){
 ?>
 
+<?php
+if(isset($_POST["deleteconversation"])){
+    $senderid = $_POST["senderid"];
+    $recieverid = $_POST["recieverid"];
+
+    $deleteConversation = "delete from conversations where sender_id = '$senderid' and receiver_id = '$recieverid'";
+    $result = $db->query($deleteConversation);
+    $deleteConversation1 = "delete from conversations where sender_id = '$recieverid' and receiver_id = '$senderid'";
+    $result1 = $db->query($deleteConversation1);
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -291,8 +305,8 @@ if($page == "manage-fakechat"){
         .chat-messages {
             display: flex;
             flex-direction: column;
-            max-height: 390px;
-            min-height: 390px;
+            max-height: 380px;
+            min-height: 380px;
             overflow-y: scroll
         }
 
@@ -332,7 +346,7 @@ if($page == "manage-fakechat"){
         .chatusers {
             display: flex;
             flex-direction: column;
-            max-height: 540px;
+            max-height: 530px;
             overflow-y: scroll
         }
     </style>
@@ -574,7 +588,15 @@ if($page == "manage-fakechat"){
                             </div>
                            </div>
                            <!-- <div style="width: 20%;" id="col-test">
-                            <p id="paragraph" class="mt-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita provident, laudantium laboriosam facere debitis repellendus quaerat dolore officia, non quia quibusdam, quos nobis similique doloribus soluta repellat animi autem architecto.</p>
+
+                                <div class="card">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
                            </div> -->
                         </div>
                     </div>
@@ -582,6 +604,66 @@ if($page == "manage-fakechat"){
             </div>
         </div>
     </main>
+
+    <!-- Modal -->
+<div class="modal fade" id="userinformationmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">User Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                From: <span id="username"></span>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Email:</strong><br><small id="useremail"></small></li>
+                                <li class="list-group-item"><strong>Balance: </strong><span id="userbalance"></span></li>
+                                <li class="list-group-item"><strong>Created at:</strong><br><span id="usercreated_at"></span></li>
+                                <li class="list-group-item"><strong>Lat: </strong><span id="userlat"></span></li>
+                                <li class="list-group-item"><strong>Lng: </strong><span id="userlng"></span></li>
+                                <li class="list-group-item"><strong>Verified: </strong><br><span id="userverified"></span></li>
+                                <li class="list-group-item"><strong>Gender: </strong><br><span id="usergender"></span></li>
+                             </ul>
+                            </div>
+                </div>
+
+
+                <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                To: <span id="username1"></span>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Email:</strong><br><small id="useremail1"></small></li>
+                                <li class="list-group-item"><strong>Balance: </strong><span id="userbalance1"></span></li>
+                                <li class="list-group-item"><strong>Created at:</strong><br><span id="usercreated_at1"></span></li>
+                                <li class="list-group-item"><strong>Lat: </strong><span id="userlat1"></span></li>
+                                <li class="list-group-item"><strong>Lng: </strong><span id="userlng1"></span></li>
+                                <li class="list-group-item"><strong>Verified: </strong><br><span id="userverified1"></span></li>
+                                <li class="list-group-item"><strong>Gender: </strong><br><span id="usergender1"></span></li>
+                             </ul>
+                            </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="" method="post">
+            <input type="hidden" name="senderid" id="deletesenderid">
+            <input type="hidden" name="recieverid" id="deleterecieverid">
+            <button type="submit" class="btn btn-danger" name="deleteconversation" onclick="return confirm('Are you Sure to Delete This conversation?');">Delete Conversation</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
@@ -602,6 +684,7 @@ if($page == "manage-fakechat"){
 
     function viewChat(senderid,receiverid, reload = "bottom") {
 
+        // userinformation(senderid, receiverid);
 $.post(Wo_Ajax_Requests_File() + '?f=getchat&senderid='+senderid+'&receiverid='+receiverid, function (data) {
     if(data.status==200){
            $('#chat_result').html(data.chat);
@@ -612,12 +695,27 @@ $.post(Wo_Ajax_Requests_File() + '?f=getchat&senderid='+senderid+'&receiverid='+
            if(reload == "bottom"){
             scrollToBottom();
            }
+
         //    $('.dt_emoji1').val('');
         //    $('.dt_emoji1').focus();
         // alert("hello");
 
        }
     });
+    
+    
+};
+
+function userinformation() {
+
+    var to = document.getElementById('to_message').value; 
+      var from = document.getElementById('from_message').value;
+
+      if(to != '' && from != ''){
+          $.get(Wo_Ajax_Requests_File() + '?f=getuserinformation&senderid='+from+'&receiverid='+to, function (data) {
+              console.log(data);
+              });
+      }
     
     
 };
@@ -639,7 +737,6 @@ function reloadUsers(){
         // $('#showchatusers').empty();
 
         $.get(Wo_Ajax_Requests_File() + '?f=reloaduser&username=', function (data) {
-            console.log("here");
     if(data){
            $('#showchatusers').html(data);
            $("#chatusers").animate({ scrollTop: $('#chatusers').prop("scrollHeight")}, 1000);
@@ -659,16 +756,71 @@ setInterval(reloadUsers, 10000);
     
     var columnWidthIsFull = true;
     document.getElementById('showuserdetail').addEventListener('click', function () {
-        var secondColumn = document.getElementById('chat-main-container');
-        var coltest = document.getElementById('col-test');
+        
+        var to = document.getElementById('to_message').value; 
+      var from = document.getElementById('from_message').value;
 
-        if (columnWidthIsFull) {
-            secondColumn.style.width = '75%';
-            columnWidthIsFull = false;
-        } else {
-            secondColumn.style.width = '100%';
-            columnWidthIsFull = true;
-        }
+      if(to != '' && from != ''){
+          $.get(Wo_Ajax_Requests_File() + '?f=getuserinformation&senderid='+from+'&receiverid='+to, function (data) {
+            //   console.log(data);
+            //   console.log(data[1][0]["username"]);
+
+            var gender = "Unknown";
+                if(data[0][0]["gender"] == "4525"){
+                    gender = "female";
+                }
+
+                if(data[0][0]["gender"] == "4526"){
+                    gender = "male";
+                }
+
+                document.getElementById("usergender").innerHTML = gender;
+
+                document.getElementById("deletesenderid").value = data[0][0]["id"];
+                document.getElementById("username").innerHTML = data[0][0]["username"];
+                document.getElementById("useremail").innerHTML = data[0][0]["email"];
+                document.getElementById("userbalance").innerHTML = data[0][0]["balance"];
+                document.getElementById("usercreated_at").innerHTML = data[0][0]["created_at"];
+                document.getElementById("userlat").innerHTML = data[0][0]["lat"];
+                document.getElementById("userlng").innerHTML = data[0][0]["lng"];
+                document.getElementById("userverified").innerHTML = data[0][0]["verified"];
+
+                var gender1 = "Unknown";
+                if(data[1][0]["gender"] == "4525"){
+                    gender1 = "female";
+                }
+
+                if(data[1][0]["gender"] == "4526"){
+                    gender1 = "male";
+                }
+
+                document.getElementById("usergender1").innerHTML = gender1;
+
+                document.getElementById("deleterecieverid").value = data[1][0]["id"];
+                document.getElementById("username1").innerHTML = data[1][0]["username"];
+                document.getElementById("useremail1").innerHTML = data[1][0]["email"];
+                document.getElementById("userbalance1").innerHTML = data[1][0]["balance"];
+                document.getElementById("usercreated_at1").innerHTML = data[1][0]["created_at"];
+                document.getElementById("userlat1").innerHTML = data[1][0]["lat"];
+                document.getElementById("userlng1").innerHTML = data[1][0]["lng"];
+                document.getElementById("userverified1").innerHTML = data[1][0]["verified"];
+
+              $("#userinformationmodel").modal("show");
+              });
+      }
+
+        // var secondColumn = document.getElementById('chat-main-container');
+        // var coltest = document.getElementById('col-test');
+
+        // if (columnWidthIsFull) {
+        //     secondColumn.style.width = '75%';
+        //     columnWidthIsFull = false;
+        //     coltest.style.display = "block";
+        // } else {
+        //     secondColumn.style.width = '100%';
+        //     columnWidthIsFull = true;
+        //     coltest.style.display = "none";
+        // }
     });
   </script>
 </body>
@@ -1479,7 +1631,7 @@ setInterval(reloadUsers, 10000);
                     </li> -->
 
                     <li <?php echo ($page == 'manage-fakechat' ) ? 'class="active"' : ''; ?>>
-                        <a  href="manage-fakechat">
+                        <a  href="https://simplisathi.com/admin-cp/manage-fakechat">
                             <span class="nav-link-icon">
                                 <i class="material-icons">perm_media</i>
                             </span>

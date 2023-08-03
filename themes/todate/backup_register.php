@@ -1,13 +1,12 @@
-<div class="to_auth_page register" style="background-color: #E3436F;">
-	<div class="login_page" style="background-color: #E3436F;">
+<div class="to_auth_page register">
+	<div class="login_page">
 		<div class="header_logo">
 			<a id="logo-container" href="<?php echo $site_url;?>/" class="brand-logo"><img src="<?php echo $theme_url;?>assets/img/logo.png" /></a>
 		</div>
-		<div class="login-pagez" style="background-color: #E3436F;">
+		<div class="login-pagez">
 			<div class="login-form">
-			<img src="<?php echo $theme_url;?>assets/loginimage.png" style="width: 100%;" alt="">
-				<!-- <h4><?php echo __( 'Get started,' );?></h4> -->
-				<!-- <p><?php echo __( 'please signup to continue your account.' );?></p> -->
+				<h4><?php echo __( 'Get started,' );?></h4>
+				<p><?php echo __( 'please signup to continue your account.' );?></p>
 				<form method="POST" action="/Useractions/register" class="register">
 					<div class="alert alert-success" role="alert" style="display:none;"></div>
 					<div class="alert alert-danger" role="alert" style="display:none;"></div>
@@ -57,13 +56,11 @@
 						<span><?php echo str_replace(array('{terms}','{privacy}'),array('<a href="<?php echo $site_url;?>/terms" data-ajax="/terms">'.__('terms_of_use').'</a>','<a href="<?php echo $site_url;?>/privacy" data-ajax="/privacy">'.__('privacy_policy').'</a>'),__( 'terms_register_text' )) ;?></span>
 					</label>
 					<div class="dt_login_footer">
-						<button class="btn btn-large bold btn_primary" style="background-color: #B30054 !important;" id="sign_submit" type="submit" disabled><?php echo __( 'Register' );?></button>
+						<button class="btn btn-large bold btn_primary" id="sign_submit" type="submit" disabled><?php echo __( 'Register' );?></button>
 					</div>		
 					<div class="clear"></div>
 				</form>
-				<!-- <p class="to_altr_auth_opt"><?php echo __( 'Already have an account?' ); ?> <a href="<?php echo $site_url;?>/login" data-ajax="/login"><?php echo __( 'Login' );?></a></p> -->
-				<p class="to_altr_auth_opt" style="text-align: center;font-weight: bold;color:white"><?php echo __( 'Already have an account?' ); ?> </p>
-				<p style="text-align: center;font-weight: bold;"><a style="color: #B30054;" href="<?php echo $site_url;?>/login" data-ajax="/login">Login HERE</a></p>
+				<p class="to_altr_auth_opt"><?php echo __( 'Already have an account?' ); ?> <a href="<?php echo $site_url;?>/login" data-ajax="/login"><?php echo __( 'Login' );?></a></p>
 			</div>    
 		</div>
 		<svg width="742px" height="135px" viewBox="0 0 742 135" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,18.1943359 C0,18.1943359 33.731258,1.47290595 88.7734375,0.0931329845 C219.81339,-3.19171847 250.381265,81.3678781 463.388672,103.315789 C574.953531,114.811237 741.039062,66.8974609 741.039062,66.8974609 L741.039062,134 L0,133.714227 L0,18.1943359 Z" id="Rectangle-2" fill="#dcf3dd" opacity="0.53177472" style="mix-blend-mode: multiply;"></path><path d="M0,98.1572266 C0,98.1572266 104.257812,78.1484375 186.296875,78.1484375 C268.335938,78.1484375 310.78125,115.222656 369,104.40625 C534.365804,73.6830944 552.410156,15.5898438 625.519531,7.62890625 C698.628906,-0.33203125 741.039062,42.75 741.039062,42.75 L741.039062,134 L0,134.166016 L0,98.1572266 Z" id="Rectangle-4" fill="#dcf3dd" opacity="0.37004431" style="mix-blend-mode: multiply;"></path> <path d="M0,45 C0,45 62.1359299,107.911868 208.148437,109.703125 C354.160945,111.494382 436.994353,57.1871807 491.703125,51.9257812 C644.628906,37.21875 741.039062,109.703125 741.039062,109.703125 L741.039062,134 L0,134 L0,45 Z" id="Rectangle-5" fill="#dcf3dd" opacity="0.231809701" style="mix-blend-mode: multiply;"></path> <path d="M0.288085938,112.378906 C0.288085938,112.378906 81.0614612,76.8789372 194.78125,75.40625 C308.501039,73.9335628 337.203138,98.34218 458.777344,106.441406 C580.35155,114.540633 741,116.601562 741,116.601562 L741.039062,134 L0,132.889648 L0.288085938,112.378906 Z" id="Rectangle-6" fill="#dcf3dd" opacity="0.209188433" style="mix-blend-mode: multiply;"></path></svg>

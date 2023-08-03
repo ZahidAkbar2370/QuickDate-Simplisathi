@@ -1,57 +1,21 @@
-<style>
-	.btn-outline {
-  border: 2px solid white;
-  background-color: #E3436F;
-  color: black;
-  padding: 14px 21px;
-  font-size: 16px;
-  cursor: pointer;
-  color: white;
-  width: 175px;
-}
-</style>
-<div class="to_auth_page" style="background-color: #E3436F;">
-	<div class="login_page" style="background-color: #E3436F;">
+<div class="to_auth_page" style="background-color: #BD0D58;">
+	<div class="login_page" style="background-color: #BD0D58;">
 		<div class="header_logo">
 			<a id="logo-container" href="<?php echo $site_url;?>/" class="brand-logo"><img src="<?php echo $theme_url;?>assets/img/logo.png" /></a>
 		</div>
-		<div class="login-pagez" style="background-color: #E3436F;">
+		<div class="login-pagez" style="background-color: #BD0D58;">
 			<div class="login-form">
-				<img src="<?php echo $theme_url;?>assets/loginimage.png" style="width: 100%;" alt="">
-				<!-- <h4>php echo __( 'Welcome back,' );</h4>
-				<p>php echo __( 'please login to your account.' );</p> -->
-				
-				<!-- <hr class="border_hr"> -->
-				<form method="POST" action="/Useractions/login" class="login">
-					<div class="alert alert-success" role="alert" style="display:none;"></div>
-					<div class="alert alert-danger" role="alert" style="display:none;"></div>
-					<div class="to_mat_input">
-						<input type="text" name="username" id="username" class="browser-default" placeholder="Email or Username" required autofocus>
-						<label for="username"><?php echo __( 'Username or Email' );?></label>
-					</div>
-					<div class="to_mat_input">
-						<input type="password" name="password" id="password" class="browser-default" placeholder="Enter Password" required>
-						<label for="password"><?php echo __( 'Password' );?></label>
-					</div>
-					<?php if(!empty( $_GET['last_url'])){?>
-						<input type="hidden" name="last_url" value="<?php echo urldecode(Secure($_GET['last_url']));?>">
-					<?php } ?>
-					<div class="forgot_password">
-						<a href="<?php echo $site_url;?>/forgot" data-ajax="/forgot"><?php echo __( 'Forgot Password?' );?></a>
-					</div>
-					<div class="dt_login_footer">
-						<button class="btn btn-large bold btn_primary" type="submit" name="action" style="background-color: #B30054;"><?php echo __( 'Login' );?></button>
-					</div>		
-					<div class="clear"></div>
-				</form>
-				<div class="text-center login-icons" style="margin-top: 30px;"><?php if($config->facebookLogin == '1' ){ ?>
+				<h4><?php echo __( 'Welcome back,' );?></h4>
+				<p><?php echo __( 'please login to your account.' );?></p>
+				<div class="text-center login-icons"><?php if($config->facebookLogin == '1' ){ ?>
+					<input type="color">
 					<div>
-					<a class="btn-outline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M23,11H21V9H19V11H17V13H19V15H21V13H23M8,11V13.4H12C11.8,14.4 10.8,16.4 8,16.4C5.6,16.4 3.7,14.4 3.7,12C3.7,9.6 5.6,7.6 8,7.6C9.4,7.6 10.3,8.2 10.8,8.7L12.7,6.9C11.5,5.7 9.9,5 8,5C4.1,5 1,8.1 1,12C1,15.9 4.1,19 8,19C12,19 14.7,16.2 14.7,12.2C14.7,11.7 14.7,11.4 14.6,11H8Z" /></svg>Facebook</a>
+						<a href="<?php echo $site_url;?>/social-login.php?provider=Facebook" onclick="clickAndDisable(this);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="background-color: #2d4373;"><path fill="currentColor" d="M17,2V2H17V6H15C14.31,6 14,6.81 14,7.5V10H14L17,10V14H14V22H10V14H7V10H10V6A4,4 0 0,1 14,2H17Z" /></svg></a>
 					</div>
 					<?php } ?><?php if($config->googleLogin == '1' ){ ?>
-						<div>
-						<a class="btn-outline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M23,11H21V9H19V11H17V13H19V15H21V13H23M8,11V13.4H12C11.8,14.4 10.8,16.4 8,16.4C5.6,16.4 3.7,14.4 3.7,12C3.7,9.6 5.6,7.6 8,7.6C9.4,7.6 10.3,8.2 10.8,8.7L12.7,6.9C11.5,5.7 9.9,5 8,5C4.1,5 1,8.1 1,12C1,15.9 4.1,19 8,19C12,19 14.7,16.2 14.7,12.2C14.7,11.7 14.7,11.4 14.6,11H8Z" /></svg>Google</a>
-						</div>
+					<div>
+						<a href="<?php echo $site_url;?>/social-login.php?provider=Google" onclick="clickAndDisable(this);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="background-color: #c23321;"><path fill="currentColor" d="M23,11H21V9H19V11H17V13H19V15H21V13H23M8,11V13.4H12C11.8,14.4 10.8,16.4 8,16.4C5.6,16.4 3.7,14.4 3.7,12C3.7,9.6 5.6,7.6 8,7.6C9.4,7.6 10.3,8.2 10.8,8.7L12.7,6.9C11.5,5.7 9.9,5 8,5C4.1,5 1,8.1 1,12C1,15.9 4.1,19 8,19C12,19 14.7,16.2 14.7,12.2C14.7,11.7 14.7,11.4 14.6,11H8Z" /></svg></a>
+					</div>
 					<?php } ?><?php if($config->twitterLogin == '1' ){ ?>
 					<div>
 						<a href="<?php echo $site_url;?>/social-login.php?provider=Twitter" onclick="clickAndDisable(this);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="background-color: #2795e9;"><path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" /></svg></a>
@@ -88,10 +52,31 @@
 					<div>
 						<a href="<?php echo $site_url;?>/social-login.php?provider=OkRu" onclick="clickAndDisable(this);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="background-color: #e27e35;"><path fill="currentColor" d="M 13.878906 16.082031 C 14.828125 15.863281 15.738281 15.488281 16.578125 14.960938 C 17.210938 14.5625 17.40625 13.722656 17.003906 13.085938 C 16.601562 12.449219 15.765625 12.253906 15.125 12.65625 C 13.222656 13.855469 10.773438 13.851562 8.871094 12.65625 C 8.234375 12.253906 7.394531 12.449219 6.992188 13.085938 C 6.59375 13.71875 6.785156 14.5625 7.421875 14.960938 C 8.257812 15.488281 9.171875 15.863281 10.117188 16.082031 L 7.523438 18.675781 C 6.992188 19.210938 6.992188 20.070312 7.523438 20.601562 C 7.789062 20.867188 8.136719 21 8.484375 21 C 8.832031 21 9.179688 20.867188 9.449219 20.601562 L 12 18.050781 L 14.550781 20.601562 C 15.085938 21.132812 15.945312 21.132812 16.476562 20.601562 C 17.007812 20.070312 17.007812 19.207031 16.476562 18.675781 L 13.878906 16.082031 M 12 5.722656 C 13.0625 5.722656 13.925781 6.585938 13.925781 7.648438 C 13.925781 8.707031 13.0625 9.570312 12 9.570312 C 10.941406 9.570312 10.074219 8.707031 10.074219 7.648438 C 10.074219 6.585938 10.941406 5.722656 12 5.722656 Z M 12 12.289062 C 14.5625 12.289062 16.644531 10.207031 16.644531 7.648438 C 16.644531 5.082031 14.5625 3 12 3 C 9.4375 3 7.355469 5.082031 7.355469 7.644531 C 7.355469 10.207031 9.4375 12.289062 12 12.289062 Z M 12 12.289062 "/></svg></a>
 					</div>
+					<?php } ?></div>
+				<hr class="border_hr">
+				<form method="POST" action="/Useractions/login" class="login">
+					<div class="alert alert-success" role="alert" style="display:none;"></div>
+					<div class="alert alert-danger" role="alert" style="display:none;"></div>
+					<div class="to_mat_input">
+						<input type="text" name="username" id="username" class="browser-default" placeholder="<?php echo __( 'Username or Email' );?>" required autofocus>
+						<label for="username"><?php echo __( 'Username or Email' );?></label>
+					</div>
+					<div class="to_mat_input">
+						<input type="password" name="password" id="password" class="browser-default" placeholder="<?php echo __( 'Password' );?>" required>
+						<label for="password"><?php echo __( 'Password' );?></label>
+					</div>
+					<?php if(!empty( $_GET['last_url'])){?>
+						<input type="hidden" name="last_url" value="<?php echo urldecode(Secure($_GET['last_url']));?>">
 					<?php } ?>
-				</div>
-				<p class="to_altr_auth_opt" style="text-align: center;font-weight: bold;color:white"><?php echo __( 'Don\'t have an account?' ); ?> </p>
-				<p style="text-align: center;font-weight: bold;"><a style="color: #B30054;" href="<?php echo $site_url;?>/register" data-ajax="/register">SIGNUP HERE</a></p>
+					<div class="forgot_password">
+						<a href="<?php echo $site_url;?>/forgot" data-ajax="/forgot"><?php echo __( 'Forgot Password?' );?></a>
+					</div>
+					<div class="dt_login_footer">
+						<button class="btn btn-large bold btn_primary" type="submit" name="action"><?php echo __( 'Login' );?></button>
+					</div>		
+					<div class="clear"></div>
+				</form>
+				<p class="to_altr_auth_opt"><?php echo __( 'Don\'t have an account?' ); ?> <a href="<?php echo $site_url;?>/register" data-ajax="/register"><?php echo __( 'Register' );?></a></p>
 			</div>    
 		</div>
 		<svg width="742px" height="135px" viewBox="0 0 742 135" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,18.1943359 C0,18.1943359 33.731258,1.47290595 88.7734375,0.0931329845 C219.81339,-3.19171847 250.381265,81.3678781 463.388672,103.315789 C574.953531,114.811237 741.039062,66.8974609 741.039062,66.8974609 L741.039062,134 L0,133.714227 L0,18.1943359 Z" id="Rectangle-2" fill="#ffe9ef" opacity="0.53177472" style="mix-blend-mode: multiply;"></path><path d="M0,98.1572266 C0,98.1572266 104.257812,78.1484375 186.296875,78.1484375 C268.335938,78.1484375 310.78125,115.222656 369,104.40625 C534.365804,73.6830944 552.410156,15.5898438 625.519531,7.62890625 C698.628906,-0.33203125 741.039062,42.75 741.039062,42.75 L741.039062,134 L0,134.166016 L0,98.1572266 Z" id="Rectangle-4" fill="#ffe9ef" opacity="0.37004431" style="mix-blend-mode: multiply;"></path> <path d="M0,45 C0,45 62.1359299,107.911868 208.148437,109.703125 C354.160945,111.494382 436.994353,57.1871807 491.703125,51.9257812 C644.628906,37.21875 741.039062,109.703125 741.039062,109.703125 L741.039062,134 L0,134 L0,45 Z" id="Rectangle-5" fill="#ffe9ef" opacity="0.231809701" style="mix-blend-mode: multiply;"></path> <path d="M0.288085938,112.378906 C0.288085938,112.378906 81.0614612,76.8789372 194.78125,75.40625 C308.501039,73.9335628 337.203138,98.34218 458.777344,106.441406 C580.35155,114.540633 741,116.601562 741,116.601562 L741.039062,134 L0,132.889648 L0.288085938,112.378906 Z" id="Rectangle-6" fill="#ffe9ef" opacity="0.209188433" style="mix-blend-mode: multiply;"></path></svg>
@@ -102,7 +87,7 @@
 		<div class="to_auth_circle-3"></div>
 		<div class="login_aside_innr">
 			<h2><?php echo __( 'Don\'t have an account?' ); ?></h2>
-			<!-- <p><?php echo __( 'features_you_can___t_live_without' );?></p> -->
+			<p><?php echo __( 'features_you_can___t_live_without' );?></p>
 			<a class="btn" href="<?php echo $site_url;?>/register" data-ajax="/register"><span><?php echo __( 'Register' );?></span></a>
 		</div>
 	</div>
